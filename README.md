@@ -1,3 +1,3 @@
 # learn-js
 JavaScript tutorial repo
-Barukula Snehitha Naga sai 
+#Barukula Snehitha Naga sai 
