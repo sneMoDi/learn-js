@@ -2,7 +2,7 @@ window.onload = function() {
   document.getElementById('addTableBtn').addEventListener('click', addTable);
 }
 
-function createTRNode(colNodes) {
+function createTRNode(colNodes, btnNodes) {
   let trNode = document.createElement("tr");
   colNodes.forEach(function(colNode) {
     trNode.appendChild(colNode);
@@ -21,11 +21,29 @@ function createTxtNode(txt) {
   return txtNode;
 }
 
+function createButtonNode(btnTxt, e, l) {
+  let btnNode = document.createElement("button");
+  let txt = createTxtNode(btnTxt);
+  btnNode.appendChild(txt);
+  btnNode.addEventListener(e, l);
+  return btnNode;
+}
 function addTable() {
   const tableNode = document.createElement("table");
   for(let i = 0; i < 3; i++) {
     let col1 = createTDNode(createTxtNode("Cell (" + i + ", 0)"));
-    tableNode.appendChild(createTRNode([col1]));
+    
+    let col2 = createTDNode(createButtonNode("Edit Text", "click", function () {
+      edit(col1);
+    }));
+    tableNode.appendChild(createTRNode([col1, col2]));
   }
   document.getElementById("root").appendChild(tableNode);
+}
+
+function edit(node) {
+  let newNode = document.createElement("input");
+  newNode.type = 'text';
+  newNode.placeholder = "Enter Cell (x,y)...";
+  node.replaceChild(newNode, node.childNodes[0]);
 }
